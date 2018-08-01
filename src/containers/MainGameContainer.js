@@ -5,18 +5,20 @@ import EndGame from '../components/EndGame';
 
 class GameContainer extends Component {
     state = {
-        startGame: false,
-        playGame: true,
+        startGame: true,
+        playGame: false,
         endGame: false,
-        selectedTopic: 0
+        selectedTopic: 0,
+        score: 0
     }
     
     handlePlayClick = (topic_id) => {
         this.setState({startGame: false, playGame: true, selectedTopic:topic_id});
     }
     
-    handleEndClick = () => {
-        this.setState({playGame: false, endGame: true});
+    handleEndClick = (score) => {
+        console.log(score)
+        this.setState({playGame: false, endGame: true, score: score});
     }
     
     handlePlayAgainClick = () => {
@@ -28,7 +30,7 @@ class GameContainer extends Component {
       <div>
         {this.state.startGame === true ? <StartGame handlePlayClick={this.handlePlayClick}/>: ""}
         {this.state.playGame === true ? <PlayGameContainer selectedTopic={this.state.selectedTopic} handleEndClick={this.handleEndClick} />: ""}
-        {this.state.endGame === true ? <EndGame handlePlayAgainClick={this.handlePlayAgainClick}/>: ""}
+        {this.state.endGame === true ? <EndGame handlePlayAgainClick={this.handlePlayAgainClick} score={this.state.score}/>: ""}
       </div>
     );
   }

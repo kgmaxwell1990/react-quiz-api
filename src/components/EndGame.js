@@ -6,7 +6,8 @@ class EndGame extends Component {
     return (
       <div>
         <h1>End Game</h1>
-        <button onClick={this.props.handlePlayAgainClick}>Play Again</button>
+        <h3> Your score: {this.props.score} / 10 </h3>
+        <button onClick={this.props.handlePlayAgainClick}>Click To Play Again</button>
       </div>
     );
   }

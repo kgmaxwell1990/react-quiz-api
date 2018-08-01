@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 class PlayGameContainer extends Component {
     state = {
-        questionsAnswers: []
+        questionsAnswers: [],
+        score: 0
     }
 
     componentDidMount() {
@@ -60,10 +61,17 @@ class PlayGameContainer extends Component {
     
     handleGuess = (questionData, guess) => {
         if (questionData.correct_answer === guess.answer) {
-            console.log("Woo");
+            console.log("correct");
+            this.setState({score: this.state.score + 1 });
         }else {
-            console.log("Boo");
+            this.wrong_answer();
         }
+        
+    }
+    
+    
+    wrong_answer = () => {
+        console.log("wrong");
     }
 
 
@@ -75,7 +83,7 @@ class PlayGameContainer extends Component {
         
         {this.state.questionsAnswers}
         
-        <button onClick={this.props.handleEndClick}>End Game</button>
+        <button onClick={this.props.handleEndClick.bind(this, this.state.score)}>End Game</button>
       </div>
         );
     }
