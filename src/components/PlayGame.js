@@ -6,6 +6,7 @@ class PlayGame extends Component {
     return (
       <div>
         {this.props.questionsAnswers}
+        <button onClick={this.props.getData}>Next</button>
       </div>
     );
   }

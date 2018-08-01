@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 // import PlayGame from '../components/PlayGame';
 
 class PlayGameContainer extends Component {
-    state = {
+    state= {
         questionsAnswers: [],
         score: 0
+        };
+    
+    componentWillReceiveProps() {
+        this.formatDataAndUpdate()
     }
 
     componentDidMount() {
-
-        const questionsAnswersPre = [{ "category": "General Knowledge", "type": "multiple", "difficulty": "hard", "question": "What type of dog is &#039;Handsome Dan&#039;, the mascot of Yale University?", "correct_answer": "Bulldog", "incorrect_answers": ["Yorkshire Terrier", "Boxer", "Pug"] },
-            { "category": "General Knowledge", "type": "multiple", "difficulty": "easy", "question": "What does a funambulist walk on?", "correct_answer": "A Tight Rope", "incorrect_answers": ["Broken Glass", "Balls", "The Moon"] },
-            { "category": "General Knowledge", "type": "boolean", "difficulty": "easy", "question": "The Great Wall of China is visible from the moon.", "correct_answer": "False", "incorrect_answers": ["True"] },
-            { "category": "General Knowledge", "type": "multiple", "difficulty": "hard", "question": "Before the 19th Century, the &quot;Living Room&quot; was originally called the...", "correct_answer": "Parlor", "incorrect_answers": ["Open Room", "Sitting Room", "Loft"] },
-            { "category": "General Knowledge", "type": "multiple", "difficulty": "easy", "question": "What is the French word for &quot;hat&quot;?", "correct_answer": "Chapeau", "incorrect_answers": ["Bonnet", " &Eacute;charpe", " Casque"] }
-        ];
-
-
+        this.formatDataAndUpdate()
+    }
+    
+    formatDataAndUpdate = () => {
+        const questionsAnswersPre = this.props.qaPre;
+        
         // Format data
         for (let i = 0; i <= questionsAnswersPre.length - 1; i++) {
             let qa = questionsAnswersPre[i];
@@ -64,26 +65,20 @@ class PlayGameContainer extends Component {
             console.log("correct");
             this.setState({score: this.state.score + 1 });
         }else {
-            this.wrong_answer();
+            console.log("wrong");
         }
         
     }
-    
-    
-    wrong_answer = () => {
-        console.log("wrong");
-    }
-
 
     render() {
         return (
             <div>
         <h1>Play Game </h1>
-        <h2> Topic Selected: {this.props.selectedTopic} </h2>
         
         {this.state.questionsAnswers}
         
-        <button onClick={this.props.handleEndClick.bind(this, this.state.score)}>End Game</button>
+        <button onClick={this.props.getData}>Next</button>
+        <button onClick={this.props.endGame.bind(this, this.state.score)}>End Game</button>
       </div>
         );
     }

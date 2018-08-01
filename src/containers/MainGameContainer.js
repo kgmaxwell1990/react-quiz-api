@@ -1,36 +1,59 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+
 import StartGame from '../components/StartGame';
 import PlayGameContainer from '../containers/PlayGameContainer';
 import EndGame from '../components/EndGame';
 
 class GameContainer extends Component {
     state = {
+        sessionToken: "",
         startGame: true,
         playGame: false,
         endGame: false,
-        selectedTopic: 0,
+        qaPre: [],
+        timesPlayed: 0,
         score: 0
     }
     
-    handlePlayClick = (topic_id) => {
-        this.setState({startGame: false, playGame: true, selectedTopic:topic_id});
+    resetAll = () => {
+        this.setState({timesPlayed: 0, score: 0})
+        this.startGame()
     }
     
-    handleEndClick = (score) => {
-        console.log(score)
+    getData = () => {
+        if (this.state.timesPlayed === 10) {
+            return
+        }
+        axios.get("https://opentdb.com/api_token.php?command=request")
+        .then(response => {
+            this.setState({sessionToken: response.data.token});
+        })
+        .then(
+        axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&token=" + this.state.sessionToken)
+        .then(response => {
+            this.setState({qaPre: response.data.results});
+            this.startGame();
+        })   
+        );
+        this.setState({timesPlayed: this.state.timesPlayed + 1})
+
+    }
+    
+    startGame = () => {
+        this.setState({endGame: false, startGame: false, playGame: true});
+    }
+    
+    endGame = (score) => {
         this.setState({playGame: false, endGame: true, score: score});
-    }
-    
-    handlePlayAgainClick = () => {
-        this.setState({endGame: false, startGame: true});
     }
     
   render() {
     return (
       <div>
-        {this.state.startGame === true ? <StartGame handlePlayClick={this.handlePlayClick}/>: ""}
-        {this.state.playGame === true ? <PlayGameContainer selectedTopic={this.state.selectedTopic} handleEndClick={this.handleEndClick} />: ""}
-        {this.state.endGame === true ? <EndGame handlePlayAgainClick={this.handlePlayAgainClick} score={this.state.score}/>: ""}
+        {this.state.startGame === true ? <StartGame getData={this.getData}/>: ""}
+        {this.state.playGame === true ? <PlayGameContainer endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
+        {this.state.endGame === true ? <EndGame resetAll={this.resetAll} score={this.state.score}/>: ""}
       </div>
     );
   }
