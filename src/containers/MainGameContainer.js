@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import StartGame from '../components/StartGame';
-import PlayGame from '../components/PlayGame';
+import PlayGameContainer from '../containers/PlayGameContainer';
 import EndGame from '../components/EndGame';
 
 class GameContainer extends Component {
     state = {
         startGame: true,
         playGame: false,
-        endGame: false
+        endGame: false,
+        selectedTopic: 0
     }
     
-    handlePlayClick = () => {
-        this.setState({startGame: false, playGame: true});
+    handlePlayClick = (topic_id) => {
+        this.setState({startGame: false, playGame: true, selectedTopic:topic_id});
     }
     
     handleEndClick = () => {
@@ -26,7 +27,7 @@ class GameContainer extends Component {
     return (
       <div>
         {this.state.startGame === true ? <StartGame handlePlayClick={this.handlePlayClick}/>: ""}
-        {this.state.playGame === true ? <PlayGame handleEndClick={this.handleEndClick} />: ""}
+        {this.state.playGame === true ? <PlayGameContainer selectedTopic={this.state.selectedTopic} handleEndClick={this.handleEndClick} />: ""}
         {this.state.endGame === true ? <EndGame handlePlayAgainClick={this.handlePlayAgainClick}/>: ""}
       </div>
     );
