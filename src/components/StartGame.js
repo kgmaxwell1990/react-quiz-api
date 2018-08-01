@@ -14,10 +14,10 @@ class StartGame extends Component {
       <div>
         <h1>Start Game</h1>
         <h3>Topics</h3>
-        <h5 onClick={this.setTopic.bind(this, 1)}>General Knowledge</h5>
-        <h5 onClick={this.setTopic.bind(this, 2)}>Animals</h5>
-        <h5 onClick={this.setTopic.bind(this, 3)}>History</h5>
-        <h5 onClick={this.setTopic.bind(this, 4)}>Geography</h5>
+        <button onClick={this.setTopic.bind(this, 1)}>General Knowledge</button>
+        <button onClick={this.setTopic.bind(this, 2)}>Animals</button>
+        <button onClick={this.setTopic.bind(this, 3)}>History</button>
+        <button onClick={this.setTopic.bind(this, 4)}>Geography</button>
         <button onClick={this.props.handlePlayClick.bind(this, this.state.topicSelected)}>Play</button>
       </div>
     );

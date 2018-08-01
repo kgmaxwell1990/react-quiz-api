@@ -12,23 +12,47 @@ class PlayGameContainer extends Component {
         {"category":"General Knowledge","type":"boolean","difficulty":"easy","question":"The Great Wall of China is visible from the moon.","correct_answer":"False","incorrect_answers":["True"]},
         {"category":"General Knowledge","type":"multiple","difficulty":"hard","question":"Before the 19th Century, the &quot;Living Room&quot; was originally called the...","correct_answer":"Parlor","incorrect_answers":["Open Room","Sitting Room","Loft"]},
         {"category":"General Knowledge","type":"multiple","difficulty":"easy","question":"What is the French word for &quot;hat&quot;?","correct_answer":"Chapeau","incorrect_answers":["Bonnet"," &Eacute;charpe"," Casque"]}];    
-        this.setState({questionsAnswers: questionsAnswersPre});
+    
+    
+    
+    for (let i=0; i<=questionsAnswersPre.length -1; i++) {
+        let qa = questionsAnswersPre[i]
         
-    let questionsAnswersPost = questionsAnswersPre.map(qa => {
+        // Each question needs an id
+        qa['qid'] = "q" + i;
+        
+        // Create new key value pair of all_answers
+        qa['all_answers'] = [qa['incorrect_answers']];
+        qa['all_answers'].push([qa['correct_answer']]);
+        qa['all_answers'] = [].concat(...qa['all_answers']);
+        
+        // Make all_answers into list of dictionaries with ids
+        let answers_list = []
+        for (let j = 0; j<= qa['all_answers'].length -1; j++) {
+            let answers_dict = {};
+            answers_dict["answer"] = qa['all_answers'][j]
+            answers_dict["aid"] = "a" + j
+            answers_list.push(answers_dict)
+        }
+        qa['all_answers'] = answers_list
+    }
+    
+        
+    let questionsAnswersPost = questionsAnswersPre.map(question => {
       return (
-          <div>
-              <h4>{qa.question}</h4>
-              <button>{qa.correct_answer}</button>
-              {qa.incorrect_answers.map(ia => {
+          <div key={question.qid}>
+              <h4>{question.question}</h4>
+              {question.all_answers.map(answer => {
               return (
-                  <button>{ia}</button>
+                <div key={answer.aid}>
+                  <button >{answer.answer}</button>
+                </div>
                   );
-                  
               })}
           </div>
         );
     });
-    this.setState({ questionsAnswers: questionsAnswersPost });
+    this.setState({questionsAnswers: questionsAnswersPost});
     }
     
     

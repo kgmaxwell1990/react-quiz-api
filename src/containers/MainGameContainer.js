@@ -5,8 +5,8 @@ import EndGame from '../components/EndGame';
 
 class GameContainer extends Component {
     state = {
-        startGame: true,
-        playGame: false,
+        startGame: false,
+        playGame: true,
         endGame: false,
         selectedTopic: 0
     }
