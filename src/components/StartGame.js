@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 
 class StartGame extends Component {
+  state = {
+      username: ''
+    };
 
   render() {
     return (
       <div>
-        <h1>Ready to Go?</h1>
-        <button onClick={this.props.getData}>Play</button>
+      <form onSubmit={e => this.props.getUsername(e, this.state.username)}>
+      <input value={this.state.username} onChange={evt => this.updateUsername(evt)}/>
+      <input type="submit" value="Done" />
+      </form>
+      <button onClick={this.props.getData}>Play</button>
       </div>
     );
   }
+
+  updateUsername(evt) {
+    this.setState({
+      username: evt.target.value
+    });
+  }
 }
+  
 
 export default StartGame;
