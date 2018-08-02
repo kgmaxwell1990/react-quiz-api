@@ -14,7 +14,8 @@ class GameContainer extends Component {
         username: '',
         qaPre: [],
         timesPlayed: 0,
-        score: 0
+        score: 0,
+        leaderboard: []
     }
     
     componentDidMount() {
@@ -26,7 +27,7 @@ class GameContainer extends Component {
     
     getUsername = (event, name) => {
         event.preventDefault();
-        this.setState({username: name.toUpperCase() })
+        this.setState({username: name })
     }
     
     getData = () => {
@@ -54,16 +55,37 @@ class GameContainer extends Component {
     }
     
     endGame = (score) => {
+      const username = this.state.username;
+      
+      const data = {
+        username: username,
+        score: score
+      }
+     
         this.resetAll();
+        this.setState({leaderboard: [...this.state.leaderboard, data]})
         this.setState({startGame: false, playGame: false, endGame: true, score: score});
     }
     
   render() {
+
+
+      
+    // this.
+    //   const leaderboardJXS = this.state.leaderboard.map(leader => {
+    //       return (
+    //           <div>
+    //           {leader}
+    //           </div>
+    //           )
+    //   })
+      
+      
     return (
       <div>
         {this.state.startGame === true ? <StartGame getUsername={this.getUsername} getData={this.getData}/>: ""}
         {this.state.playGame === true ? <PlayGameContainer endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
-        {this.state.endGame === true ? <EndGame getData={this.getData} home={this.home} score={this.state.score} username={this.state.username}/>: ""}
+        {this.state.endGame === true ? <EndGame leaderboard={this.state.leaderboard} getData={this.getData} home={this.home} score={this.state.score} username={this.state.username}/>: ""}
       </div>
     );
   }

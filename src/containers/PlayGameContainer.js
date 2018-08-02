@@ -23,8 +23,9 @@ class PlayGameContainer extends Component {
             // Needs an id
             qa['qid'] = "q101";
             
-            // Decode questions
+            // Decode questions and correct answer
             qa['question'] = decodeURIComponent(qa['question']);
+            qa['correct_answer'] = decodeURIComponent(qa['correct_answer']);
             
             // Create new array in the question dict for all answers
             qa['all_answers'] = [qa['incorrect_answers']];

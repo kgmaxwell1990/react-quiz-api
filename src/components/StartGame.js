@@ -9,7 +9,7 @@ class StartGame extends Component {
     return (
       <div>
       <form onSubmit={e => this.props.getUsername(e, this.state.username)}>
-      <input value={this.state.username} onChange={evt => this.updateUsername(evt)}/>
+      <input required maxLength="20" placeholder="Enter Your Name" value={this.state.username} onChange={evt => this.updateUsername(evt)}/>
       <input type="submit" value="Done" />
       </form>
       <button onClick={this.props.getData}>Play</button>
