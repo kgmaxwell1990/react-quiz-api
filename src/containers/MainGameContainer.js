@@ -16,11 +16,6 @@ class GameContainer extends Component {
         score: 0
     }
     
-    resetAll = () => {
-        this.setState({timesPlayed: 0, score: 0});
-        this.startGame();
-    }
-    
     componentDidMount() {
         axios.get("https://opentdb.com/api_token.php?command=request")
         .then(response => {
@@ -29,16 +24,20 @@ class GameContainer extends Component {
     }
     
     getData = () => {
-        if (this.state.timesPlayed === 10) {
+        console.log(this.state.timesPlayed)
+        if (this.state.timesPlayed === 9) {
             return;
         }
         axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&encode=url3986&token=" + this.state.sessionToken)
         .then(response => {
-            
             this.setState({qaPre: response.data.results});
             this.startGame();
         }); 
         this.setState({timesPlayed: this.state.timesPlayed + 1});
+    }
+    
+    resetAll = () => {
+        this.setState({timesPlayed: 0, score: 0});
     }
     
     home = () => {
@@ -50,6 +49,7 @@ class GameContainer extends Component {
     }
     
     endGame = (score) => {
+        this.resetAll();
         this.setState({startGame: false, playGame: false, endGame: true, score: score});
     }
     
@@ -58,7 +58,7 @@ class GameContainer extends Component {
       <div>
         {this.state.startGame === true ? <StartGame getData={this.getData}/>: ""}
         {this.state.playGame === true ? <PlayGameContainer endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
-        {this.state.endGame === true ? <EndGame home={this.home} resetAll={this.resetAll} score={this.state.score}/>: ""}
+        {this.state.endGame === true ? <EndGame getData={this.getData} home={this.home} score={this.state.score}/>: ""}
       </div>
     );
   }

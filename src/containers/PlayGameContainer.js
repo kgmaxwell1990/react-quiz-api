@@ -7,11 +7,11 @@ class PlayGameContainer extends Component {
         };
     
     componentWillReceiveProps() {
-        this.formatDataAndUpdate()
+        this.formatDataAndUpdate();
     }
 
     componentDidMount() {
-        this.formatDataAndUpdate()
+        this.formatDataAndUpdate();
     }
     
     formatDataAndUpdate = () => {
@@ -75,13 +75,13 @@ class PlayGameContainer extends Component {
     render() {
         return (
             <div>
-        <h1>Play Game </h1>
-        
-        {this.state.qa}
-        
-        <button onClick={this.props.getData}>Next</button>
-        <button onClick={this.props.endGame.bind(this, this.state.score)}>End Game</button>
-      </div>
+                <h1>Play Game </h1>
+                
+                {this.state.qa}
+                
+                <button onClick={this.props.getData}>Next</button>
+                <button onClick={this.props.endGame.bind(this, this.state.score)}>End Game</button>
+            </div>
         );
     }
 }
