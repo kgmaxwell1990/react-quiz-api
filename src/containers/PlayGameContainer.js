@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-// import PlayGame from '../components/PlayGame';
 
 class PlayGameContainer extends Component {
     state= {
-        questionsAnswers: [],
+        qa: [],
         score: 0
         };
     
@@ -16,40 +15,43 @@ class PlayGameContainer extends Component {
     }
     
     formatDataAndUpdate = () => {
-        const questionsAnswersPre = this.props.qaPre;
+        const qaPre = this.props.qaPre;
+
+        // Format the data
+            let qa = qaPre[0];
         
-        // Format data
-        for (let i = 0; i <= questionsAnswersPre.length - 1; i++) {
-            let qa = questionsAnswersPre[i];
-
-            // Each question needs an id
-            qa['qid'] = "q" + i;
-
-            // Create new key value pair of all_answers
+            // Needs an id
+            qa['qid'] = "q101";
+            
+            // Decode questions
+            qa['question'] = decodeURIComponent(qa['question']);
+            
+            // Create new array in the question dict for all answers
             qa['all_answers'] = [qa['incorrect_answers']];
             qa['all_answers'].push([qa['correct_answer']]);
             qa['all_answers'] = [].concat(...qa['all_answers']);
-
+            
             // Make all_answers into list of dictionaries with ids
             let answers_list = [];
             for (let j = 0; j <= qa['all_answers'].length - 1; j++) {
                 let answers_dict = {};
-                answers_dict["answer"] = qa['all_answers'][j];
+                
+                answers_dict["answer"] = decodeURIComponent(qa['all_answers'][j]);
                 answers_dict["aid"] = "a" + j;
                 answers_list.push(answers_dict);
             }
+            
+            // Randomise the order of the possible answers
             qa['all_answers'] = answers_list.sort(function(a, b){return 0.5 - Math.random()});
-        }
 
-
-        let questionsAnswersPost = questionsAnswersPre.map(question => {
+        let qaPost = qaPre.map(q => {
             return (
-                <div key={question.qid}>
-              <h4>{question.question}</h4>
-              {question.all_answers.map(answer => {
+                <div key={q.qid}>
+              <h4>{q.question}</h4>
+              {q.all_answers.map(a => {
               return (
-                <div key={answer.aid} onClick={this.handleGuess.bind(this, question, answer)}>
-                  <button >{answer.answer}</button>
+                <div key={a.aid} onClick={this.handleGuess.bind(this, q, a)}>
+                  <button >{a.answer}</button>
                 </div>
                   );
               })}
@@ -57,7 +59,7 @@ class PlayGameContainer extends Component {
             );
         });
         
-        this.setState({ questionsAnswers: questionsAnswersPost });
+        this.setState({ qa: qaPost });
     }
     
     handleGuess = (questionData, guess) => {
@@ -75,7 +77,7 @@ class PlayGameContainer extends Component {
             <div>
         <h1>Play Game </h1>
         
-        {this.state.questionsAnswers}
+        {this.state.qa}
         
         <button onClick={this.props.getData}>Next</button>
         <button onClick={this.props.endGame.bind(this, this.state.score)}>End Game</button>

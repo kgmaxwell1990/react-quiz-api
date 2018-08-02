@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 import StartGame from '../components/StartGame';
 import PlayGameContainer from '../containers/PlayGameContainer';
@@ -17,27 +17,32 @@ class GameContainer extends Component {
     }
     
     resetAll = () => {
-        this.setState({timesPlayed: 0, score: 0})
-        this.startGame()
+        this.setState({timesPlayed: 0, score: 0});
+        this.startGame();
+    }
+    
+    componentDidMount() {
+        axios.get("https://opentdb.com/api_token.php?command=request")
+        .then(response => {
+            this.setState({sessionToken: response.data.token});
+        });
     }
     
     getData = () => {
         if (this.state.timesPlayed === 10) {
-            return
+            return;
         }
-        axios.get("https://opentdb.com/api_token.php?command=request")
+        axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&encode=url3986&token=" + this.state.sessionToken)
         .then(response => {
-            this.setState({sessionToken: response.data.token});
-        })
-        .then(
-        axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&token=" + this.state.sessionToken)
-        .then(response => {
+            
             this.setState({qaPre: response.data.results});
             this.startGame();
-        })   
-        );
-        this.setState({timesPlayed: this.state.timesPlayed + 1})
-
+        }); 
+        this.setState({timesPlayed: this.state.timesPlayed + 1});
+    }
+    
+    home = () => {
+        this.setState({endGame: false, startGame: true, playGame: false});
     }
     
     startGame = () => {
@@ -45,7 +50,7 @@ class GameContainer extends Component {
     }
     
     endGame = (score) => {
-        this.setState({playGame: false, endGame: true, score: score});
+        this.setState({startGame: false, playGame: false, endGame: true, score: score});
     }
     
   render() {
@@ -53,7 +58,7 @@ class GameContainer extends Component {
       <div>
         {this.state.startGame === true ? <StartGame getData={this.getData}/>: ""}
         {this.state.playGame === true ? <PlayGameContainer endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
-        {this.state.endGame === true ? <EndGame resetAll={this.resetAll} score={this.state.score}/>: ""}
+        {this.state.endGame === true ? <EndGame home={this.home} resetAll={this.resetAll} score={this.state.score}/>: ""}
       </div>
     );
   }
