@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import StartGame from '../components/StartGame';
 import PlayGameContainer from '../containers/PlayGameContainer';
 import EndGame from '../components/EndGame';
@@ -27,13 +26,16 @@ class GameContainer extends Component {
     
     getUsername = (event, name) => {
         event.preventDefault();
-        this.setState({username: name })
+        document.getElementById("greeting").innerHTML = "Hi " + name + ", press play to start!";
+        document.getElementById('play_button').classList.remove('display_none');
+        this.setState({username: name });
     }
     
     getData = () => {
-        if (this.state.timesPlayed === 9) {
+        if (this.state.timesPlayed === 10) {
             return;
         }
+        
         axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&encode=url3986&token=" + this.state.sessionToken)
         .then(response => {
             this.setState({qaPre: response.data.results});
@@ -51,6 +53,12 @@ class GameContainer extends Component {
     }
     
     startGame = () => {
+        if (this.state.timesPlayed === 10) {
+            document.getElementById("next_button").classList.add("display_none")
+            document.getElementById("cancel_game_button").classList.add("display_none")
+            document.getElementById("finish_game_button").classList.remove("display_none")
+            return;
+        }
         this.setState({endGame: false, startGame: false, playGame: true});
     }
     
@@ -68,23 +76,12 @@ class GameContainer extends Component {
     }
     
   render() {
-
-
-      
-    // this.
-    //   const leaderboardJXS = this.state.leaderboard.map(leader => {
-    //       return (
-    //           <div>
-    //           {leader}
-    //           </div>
-    //           )
-    //   })
       
       
     return (
       <div>
         {this.state.startGame === true ? <StartGame getUsername={this.getUsername} getData={this.getData}/>: ""}
-        {this.state.playGame === true ? <PlayGameContainer endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
+        {this.state.playGame === true ? <PlayGameContainer timesPlayed={this.state.timesPlayed} home={this.home} endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
         {this.state.endGame === true ? <EndGame leaderboard={this.state.leaderboard} getData={this.getData} home={this.home} score={this.state.score} username={this.state.username}/>: ""}
       </div>
     );

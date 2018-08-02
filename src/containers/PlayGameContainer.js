@@ -7,6 +7,17 @@ class PlayGameContainer extends Component {
         };
     
     componentWillReceiveProps() {
+        
+        document.getElementById('c_answer').classList.remove('btn_green')
+        let w_ans_off = document.getElementsByClassName('w_answer')
+        for (let i = 0; i <= w_ans_off.length -1; i++) {
+            w_ans_off[i].classList.remove('btn_red');
+        }
+        let ab_on = document.getElementsByClassName('answer_btn')
+        for (let i = 0; i <= ab_on.length -1; i++) {
+            ab_on[i].disabled = false
+        }
+        
         this.formatDataAndUpdate();
     }
 
@@ -52,7 +63,7 @@ class PlayGameContainer extends Component {
               {q.all_answers.map(a => {
               return (
                 <div key={a.aid} onClick={this.handleGuess.bind(this, q, a)}>
-                  <button >{a.answer}</button>
+                  {a.answer === q.correct_answer ? <button class="answer_btn" id="c_answer">{a.answer}</button>:<button className="answer_btn w_answer">{a.answer}</button>}
                 </div>
                   );
               })}
@@ -64,6 +75,16 @@ class PlayGameContainer extends Component {
     }
     
     handleGuess = (questionData, guess) => {
+        document.getElementById('c_answer').classList.add('btn_green');
+        let w_ans_on = document.getElementsByClassName('w_answer');
+        for (let i = 0; i <= w_ans_on.length -1; i++) {
+            w_ans_on[i].classList.add('btn_red');
+        }
+        let ab_off = document.getElementsByClassName('answer_btn');
+        for (let i = 0; i <= ab_off.length -1; i++) {
+            ab_off[i].disabled = true;
+        }
+
         if (questionData.correct_answer === guess.answer) {
             console.log("correct");
             this.setState({score: this.state.score + 1 });
@@ -77,11 +98,13 @@ class PlayGameContainer extends Component {
         return (
             <div>
                 <h1>Play Game </h1>
+                <h4>Question {this.props.timesPlayed}/10</h4>
                 
                 {this.state.qa}
                 
-                <button onClick={this.props.getData}>Next</button>
-                <button onClick={this.props.endGame.bind(this, this.state.score)}>End Game</button>
+                <button id="next_button" onClick={this.props.getData}>Next</button>
+                <button id="cancel_game_button" onClick={this.props.home}>Cancel Game</button>
+                <button id="finish_game_button" class="display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
             </div>
         );
     }

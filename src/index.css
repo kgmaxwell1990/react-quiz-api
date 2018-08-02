@@ -3,3 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.display_none {
+  display: none;
+}
+
+.btn_green {
+  background-color: green;
+}
+
+.btn_red {
+  background-color: red;
+}
