@@ -7,13 +7,13 @@ class StartGame extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container intro">
       <form onSubmit={e => this.props.getUsername(e, this.state.username)}>
-      <input required maxLength="20" placeholder="Enter Your Name" value={this.state.username} onChange={evt => this.updateUsername(evt)}/>
-      <input type="submit" value="Done" />
+      <input class="form-control" required maxLength="20" placeholder="Enter Your Name" value={this.state.username} onChange={evt => this.updateUsername(evt)}/>
+      <button class="waves-effect waves-light btn btn-small">Submit</button>
       </form>
       <div id="greeting"></div>
-      <button className="display_none" id="play_button" onClick={this.props.getData}>Play</button>
+      <button className="waves-effect waves-light btn btn-large display_none" id="play_button" onClick={this.props.getData}>Play<i class="material-icons right">send</i></button>
       </div>
     );
   }

@@ -9,13 +9,22 @@ class PlayGameContainer extends Component {
     componentWillReceiveProps() {
         
         document.getElementById('c_answer').classList.remove('btn_green')
-        let w_ans_off = document.getElementsByClassName('w_answer')
-        for (let i = 0; i <= w_ans_off.length -1; i++) {
-            w_ans_off[i].classList.remove('btn_red');
+        document.getElementById('c_answer').classList.add('hover')
+        
+        let wrong_answers = document.getElementsByClassName('w_answer')
+        for (let i = 0; i <= wrong_answers.length -1; i++) {
+            wrong_answers[i].classList.remove('btn_red');
+            wrong_answers[i].classList.add('hover');
         }
-        let ab_on = document.getElementsByClassName('answer_btn')
-        for (let i = 0; i <= ab_on.length -1; i++) {
-            ab_on[i].disabled = false
+        let all_answers = document.getElementsByClassName('answer_btn')
+        for (let i = 0; i <= all_answers.length -1; i++) {
+            all_answers[i].disabled = false
+            all_answers[i].classList.add('hover');
+        }
+        
+        let answers_text = document.getElementsByClassName('answers_text')
+        for (let i = 0; i <= answers_text.length -1; i++) {
+            answers_text[i].classList.remove('color_white');
         }
         
         this.formatDataAndUpdate();
@@ -58,12 +67,14 @@ class PlayGameContainer extends Component {
 
         let qaPost = qaPre.map(q => {
             return (
-                <div key={q.qid}>
-              <h4>{q.question}</h4>
+                <div className="row" key={q.qid}>
+              <h5 className="question_text">{q.question}</h5>
               {q.all_answers.map(a => {
               return (
-                <div key={a.aid} onClick={this.handleGuess.bind(this, q, a)}>
-                  {a.answer === q.correct_answer ? <button class="answer_btn" id="c_answer">{a.answer}</button>:<button className="answer_btn w_answer">{a.answer}</button>}
+                <div className="col s6 answer_box_outer" key={a.aid} onClick={this.handleGuess.bind(this, q, a)}>
+                  {a.answer === q.correct_answer ? 
+                    <button class="answer_btn answer_box_inner hover" id="c_answer"><h6 className="answers_text">{a.answer}</h6></button>:
+                    <button className="answer_btn answer_box_inner hover w_answer"><h6 className="answers_text">{a.answer}</h6></button>}
                 </div>
                   );
               })}
@@ -75,14 +86,24 @@ class PlayGameContainer extends Component {
     }
     
     handleGuess = (questionData, guess) => {
+        
         document.getElementById('c_answer').classList.add('btn_green');
-        let w_ans_on = document.getElementsByClassName('w_answer');
-        for (let i = 0; i <= w_ans_on.length -1; i++) {
-            w_ans_on[i].classList.add('btn_red');
+        document.getElementById('c_answer').classList.remove('hover');
+        
+        let wrong_answers = document.getElementsByClassName('w_answer');
+        for (let i = 0; i <= wrong_answers.length -1; i++) {
+            wrong_answers[i].classList.add('btn_red');
+            wrong_answers[i].classList.remove('hover');
         }
-        let ab_off = document.getElementsByClassName('answer_btn');
-        for (let i = 0; i <= ab_off.length -1; i++) {
-            ab_off[i].disabled = true;
+        let all_answers = document.getElementsByClassName('answer_btn');
+        for (let i = 0; i <= all_answers.length -1; i++) {
+            all_answers[i].disabled = true;
+            all_answers[i].classList.remove('hover');
+        }
+        
+        let answers_text = document.getElementsByClassName('answers_text')
+        for (let i = 0; i <= answers_text.length -1; i++) {
+            answers_text[i].classList.add('color_white');
         }
 
         if (questionData.correct_answer === guess.answer) {
@@ -97,14 +118,13 @@ class PlayGameContainer extends Component {
     render() {
         return (
             <div>
-                <h1>Play Game </h1>
                 <h4>Question {this.props.timesPlayed}/10</h4>
                 
                 {this.state.qa}
-                
-                <button id="next_button" onClick={this.props.getData}>Next</button>
-                <button id="cancel_game_button" onClick={this.props.home}>Cancel Game</button>
-                <button id="finish_game_button" class="display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
+ 
+                <button class="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}>Next Question<i class="material-icons right">send</i></button>
+                <button class="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}>Cancel Game<i class="material-icons right">highlight_off</i></button>
+                <button id="finish_game_button" class="waves-effect waves-light btn btn-small display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
             </div>
         );
     }

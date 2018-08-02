@@ -26,7 +26,7 @@ class GameContainer extends Component {
     
     getUsername = (event, name) => {
         event.preventDefault();
-        document.getElementById("greeting").innerHTML = "Hi " + name + ", press play to start!";
+        document.getElementById("greeting").innerHTML = "<h3>Hi " + name + ", press play to start the Quiz!</h3>";
         document.getElementById('play_button').classList.remove('display_none');
         this.setState({username: name });
     }
@@ -53,6 +53,7 @@ class GameContainer extends Component {
     }
     
     startGame = () => {
+        
         if (this.state.timesPlayed === 10) {
             document.getElementById("next_button").classList.add("display_none")
             document.getElementById("cancel_game_button").classList.add("display_none")

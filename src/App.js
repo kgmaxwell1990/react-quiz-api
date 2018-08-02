@@ -4,9 +4,9 @@ import MainGameContainer from './containers/MainGameContainer';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <header className="App-header">
-          <h1 className="App-title">QUIZ GAME</h1>
+          <h1 className="App-title">CODER QUIZ</h1>
         </header>
         <hr />
         <MainGameContainer />
