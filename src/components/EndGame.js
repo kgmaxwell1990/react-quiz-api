@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 
 class EndGame extends Component {
 
-    
   render() {
+    console.log(this.props.leaderboard);
     
-    
-    
-    const leaderboard = this.props.leaderboard.map((person) => {
+    const sorted_leaderboard = this.props.leaderboard.sort(function(a,b) {
+      console.log("sorting")
+          return b.score < a.score ? 1
+          :b.score > a.score ? -1
+          : 0
+      });
+    const leaderboard = sorted_leaderboard.map((person) => {
     return (
       <h6>{person.username} - {person.score}</h6>
     );
   });
+  
+  
     return (
       <div>
         <h3>{ this.props.score <3 ? "Unlucky ": "" }
@@ -23,8 +29,8 @@ class EndGame extends Component {
         <h5>The Leaderboard </h5>
         {leaderboard}
 
-        <button class="waves-effect waves-light btn btn-small orange" onClick={this.props.home}>Home<i class="material-icons right">home</i></button>
-        <button class="waves-effect waves-light btn btn-small" onClick={this.props.getData}>Play Again<i class="material-icons right">autorenew</i></button>
+        <button className="waves-effect waves-light btn btn-small orange" onClick={this.props.home}>Home<i class="material-icons right">home</i></button>
+        <button className="waves-effect waves-light btn btn-small" onClick={this.props.getData}>Play Again<i class="material-icons right">autorenew</i></button>
       </div>
     );
   }

@@ -49,6 +49,7 @@ class GameContainer extends Component {
     }
     
     home = () => {
+        this.resetAll()
         this.setState({endGame: false, startGame: true, playGame: false});
     }
     
@@ -73,11 +74,11 @@ class GameContainer extends Component {
      
         this.resetAll();
         this.setState({leaderboard: [...this.state.leaderboard, data]})
+        
         this.setState({startGame: false, playGame: false, endGame: true, score: score});
     }
     
   render() {
-      
       
     return (
       <div>

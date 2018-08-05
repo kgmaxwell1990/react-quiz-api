@@ -8,23 +8,30 @@ class PlayGameContainer extends Component {
     
     componentWillReceiveProps() {
         
-        document.getElementById('c_answer').classList.remove('btn_green')
-        document.getElementById('c_answer').classList.add('hover')
+        document.getElementById('c_answer').classList.remove('btn_green');
+        document.getElementById('c_answer').classList.add('hover');
+        document.getElementById('icon_correct').innerHTML="";
         
-        let wrong_answers = document.getElementsByClassName('w_answer')
+        let wrong_answers = document.getElementsByClassName('w_answer');
         for (let i = 0; i <= wrong_answers.length -1; i++) {
             wrong_answers[i].classList.remove('btn_red');
             wrong_answers[i].classList.add('hover');
         }
-        let all_answers = document.getElementsByClassName('answer_btn')
+        let all_answers = document.getElementsByClassName('answer_btn');
         for (let i = 0; i <= all_answers.length -1; i++) {
-            all_answers[i].disabled = false
+            all_answers[i].disabled = false;
             all_answers[i].classList.add('hover');
         }
         
-        let answers_text = document.getElementsByClassName('answers_text')
+        
+        let answers_text = document.getElementsByClassName('answers_text');
         for (let i = 0; i <= answers_text.length -1; i++) {
             answers_text[i].classList.remove('color_white');
+        }
+        
+        let answers_icon = document.getElementsByClassName('icon_wrong');
+        for (let i = 0; i <= answers_icon.length -1; i++) {
+            answers_icon[i].innerHTML="";
         }
         
         this.formatDataAndUpdate();
@@ -73,8 +80,8 @@ class PlayGameContainer extends Component {
               return (
                 <div className="col s6 answer_box_outer" key={a.aid} onClick={this.handleGuess.bind(this, q, a)}>
                   {a.answer === q.correct_answer ? 
-                    <button class="answer_btn answer_box_inner hover" id="c_answer"><h6 className="answers_text">{a.answer}</h6></button>:
-                    <button className="answer_btn answer_box_inner hover w_answer"><h6 className="answers_text">{a.answer}</h6></button>}
+                    <button className="answer_btn answer_box_inner hover" id="c_answer"><h6 className="answers_text">{a.answer}<i class="material-icons right" id="icon_correct"></i></h6></button>:
+                    <button className="answer_btn answer_box_inner hover w_answer"><h6 className="answers_text">{a.answer}<i class="material-icons right icon_wrong"></i></h6></button>}
                 </div>
                   );
               })}
@@ -89,6 +96,7 @@ class PlayGameContainer extends Component {
         
         document.getElementById('c_answer').classList.add('btn_green');
         document.getElementById('c_answer').classList.remove('hover');
+        document.getElementById('icon_correct').innerHTML="check";
         
         let wrong_answers = document.getElementsByClassName('w_answer');
         for (let i = 0; i <= wrong_answers.length -1; i++) {
@@ -101,9 +109,14 @@ class PlayGameContainer extends Component {
             all_answers[i].classList.remove('hover');
         }
         
-        let answers_text = document.getElementsByClassName('answers_text')
+        let answers_text = document.getElementsByClassName('answers_text');
         for (let i = 0; i <= answers_text.length -1; i++) {
             answers_text[i].classList.add('color_white');
+        }
+        
+        let answers_icon = document.getElementsByClassName('icon_wrong');
+        for (let i = 0; i <= answers_icon.length -1; i++) {
+            answers_icon[i].innerHTML="clear";
         }
 
         if (questionData.correct_answer === guess.answer) {
@@ -122,9 +135,9 @@ class PlayGameContainer extends Component {
                 
                 {this.state.qa}
  
-                <button class="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}>Next Question<i class="material-icons right">send</i></button>
-                <button class="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}>Cancel Game<i class="material-icons right">highlight_off</i></button>
-                <button id="finish_game_button" class="waves-effect waves-light btn btn-small display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
+                <button className="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}>Next Question<i class="material-icons right">send</i></button>
+                <button className="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}>Cancel Game<i class="material-icons right">highlight_off</i></button>
+                <button id="finish_game_button" className="waves-effect waves-light btn btn-small display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
             </div>
         );
     }

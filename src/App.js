@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div className="container">
         <header className="App-header">
-          <h1 className="App-title">CODER QUIZ</h1>
+          <h1 className="App-title">Brain Bytes</h1>
         </header>
         <hr />
         <MainGameContainer />
