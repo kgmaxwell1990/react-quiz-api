@@ -1,25 +1,30 @@
 # Overview
 The challenge for this app was to build a quiz game.
-The web application was built with a front-end framework (Reactjs)
-Connecting to an API (https://opentdb.com/api_config.php) to retreive questions
+
+The web application was built with a front-end framework (Reactjs), connecting to an API (https://opentdb.com/api_config.php) to retreive questions.
 
 # Live Link
 Play the game at http://katie-udemy-quiz.s3-website-eu-west-1.amazonaws.com/
 
 # Technical choices and Tradeoffs
 ### Choices
-I chose to use Reactjs as I have just began teaching myself and saw it as a good learning opportunity. I am comfortable doing API calls and dealing with the data in the response so wanted to use this method to retreive the questions. Materialize was used for layout and button styling.
-I learned a lot with this challenge and enjoyed it but I believe the code quality could be better. If I was given the challenge again I would choose the Django framework as I am more familiar with it. 
+I chose to use Reactjs as I am currently self-teaching it and saw it as a good learning opportunity. I am comfortable doing API calls and dealing with the data in the response so wanted to use this method to retreive the questions. Materialize was used as a CSS library.
+
+I learned a lot with this challenge and enjoyed it but I realise my lack of experience with the Reactjs framework may have produced poor architecture design. 
+
+If I was given the challenge again I would choose the Django framework as I am more familiar with it and could write cleaner code.
+
 ### Main Challenges
 + Lack of experience with Reactjs
-+ Formatting the data coming back from the API to align with Reactjs
++ Formatting the response data from the API to align with Reactjs
 + Working out which part of the application to do the API calls
-+ Issues with components re-rendering on state/props change
++ Issues with components (not) updating on state/props change
 
 ### Tradeoffs
 + Would have liked to:
-   Store the leaderboard in a file/database to keep track across machines 
-   Have topics so users can choose type of questions
+    - Store the leaderboard in a file/database to keep track across devices
+    - Have topics so users can choose type of questions
+    - Added a countdown to limit time spent on questions
 + Should possibly have used Redux / MobX (might have eased some of the challenges outlined above)
 
 
@@ -44,7 +49,7 @@ I learned a lot with this challenge and enjoyed it but I believe the code qualit
 
 + Question and 4 possible answers are displayed to the user
 + When clicked the *handleGuess* function is called which applies styling and increments the score if the answer matched the correct answer
-+ When Next is clicked, getData is called again and this flow is repeated until 10 questions have been asked
++ When Next is clicked, *getData* is called again and this flow is repeated until 10 questions have been asked
 + A 'Go To ScoreBoard' button is made available after the 10 questions have been asked which calls the *endGame* function in the **MainGameContainer**
 + *endGame* updates the score & leaderboard, and sets the endGame state to true which calls the **EndGame Component**
 + **EndGame Component** displays the final score & leaderboard and gives the user the option to play again or return to the home screen
