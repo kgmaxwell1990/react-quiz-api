@@ -8,6 +8,7 @@ class PlayGameContainer extends Component {
     
     componentWillReceiveProps() {
         
+        // ------ Styling ------ //
         document.getElementById('c_answer').classList.remove('btn_green');
         document.getElementById('c_answer').classList.add('hover');
         document.getElementById('icon_correct').innerHTML="";
@@ -23,7 +24,6 @@ class PlayGameContainer extends Component {
             all_answers[i].classList.add('hover');
         }
         
-        
         let answers_text = document.getElementsByClassName('answers_text');
         for (let i = 0; i <= answers_text.length -1; i++) {
             answers_text[i].classList.remove('color_white');
@@ -33,6 +33,7 @@ class PlayGameContainer extends Component {
         for (let i = 0; i <= answers_icon.length -1; i++) {
             answers_icon[i].innerHTML="";
         }
+        // ------------ //
         
         this.formatDataAndUpdate();
     }
@@ -94,6 +95,7 @@ class PlayGameContainer extends Component {
     
     handleGuess = (questionData, guess) => {
         
+        // ------ Styling ------ //
         document.getElementById('c_answer').classList.add('btn_green');
         document.getElementById('c_answer').classList.remove('hover');
         document.getElementById('icon_correct').innerHTML="check";
@@ -118,12 +120,11 @@ class PlayGameContainer extends Component {
         for (let i = 0; i <= answers_icon.length -1; i++) {
             answers_icon[i].innerHTML="clear";
         }
+        // ------------ //
+        
 
         if (questionData.correct_answer === guess.answer) {
-            console.log("correct");
             this.setState({score: this.state.score + 1 });
-        }else {
-            console.log("wrong");
         }
         
     }
@@ -134,9 +135,9 @@ class PlayGameContainer extends Component {
                 <h4>Question {this.props.timesPlayed}/10</h4>
                 
                 {this.state.qa}
- 
-                <button className="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}>Next Question<i class="material-icons right">send</i></button>
-                <button className="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}>Cancel Game<i class="material-icons right">highlight_off</i></button>
+                
+                <button className="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}><i class="material-icons right">highlight_off</i>Cancel Game</button>
+                <button className="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}><i class="material-icons right">send</i>Next Question</button>
                 <button id="finish_game_button" className="waves-effect waves-light btn btn-small display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
             </div>
         );
