@@ -13,7 +13,7 @@ class StartGame extends Component {
       <button className="waves-effect waves-light btn btn-small orange">Submit</button>
       </form>
       <div id="greeting"></div>
-      <button className="waves-effect waves-light btn btn-large display_none" id="play_button" onClick={this.props.getData}>Play<i class="material-icons right">send</i></button>
+      <button className="waves-effect waves-light btn btn-large display_none" id="play_button" onClick={this.props.getData}>Play<i className="material-icons right">send</i></button>
       </div>
     );
   }

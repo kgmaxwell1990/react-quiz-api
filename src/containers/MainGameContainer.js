@@ -32,16 +32,13 @@ class MainGameContainer extends Component {
     }
 
     getData = () => {
-        if (this.state.timesPlayed === 10) {
-            return;
-        }
-
+        this.setState({ timesPlayed: this.state.timesPlayed + 1 });
         axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&encode=url3986&token=" + this.state.sessionToken)
             .then(response => {
                 this.setState({ qaPre: response.data.results });
                 this.startGame();
             });
-        this.setState({ timesPlayed: this.state.timesPlayed + 1 });
+        
     }
 
     resetAll = () => {
@@ -54,7 +51,6 @@ class MainGameContainer extends Component {
     }
 
     startGame = () => {
-
         if (this.state.timesPlayed === 10) {
             document.getElementById("next_button").classList.add("display_none")
             document.getElementById("cancel_game_button").classList.add("display_none")

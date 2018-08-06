@@ -8,9 +8,9 @@ Play the game at http://katie-udemy-quiz.s3-website-eu-west-1.amazonaws.com/
 
 # Technical choices and Tradeoffs
 ### Choices
-I chose to use Reactjs as I am currently self-teaching it and saw it as a good learning opportunity. I am comfortable doing API calls and dealing with the data in the response so wanted to use this method to retreive the questions. Materialize was used as a CSS library.
+I chose to use Reactjs as I am currently self-learning it and saw it as a good opportunity to improve skills. I am comfortable doing API calls and dealing with the data in the response so wanted to use this method to retreive the questions. Materialize was used as a CSS library.
 
-I learned a lot with this challenge and enjoyed it but I realise my lack of experience with the Reactjs framework may have produced poor architecture design. 
+I learned a lot with this challenge and enjoyed it but I realise my lack of experience with the Reactjs framework may have produced poor architecture decisions. 
 
 If I was given the challenge again I would choose the Django framework as I am more familiar with it and could write cleaner code.
 
@@ -31,7 +31,7 @@ If I was given the challenge again I would choose the Django framework as I am m
 # Details of the Application
 + index.js renders the **App Component** in *App.js*
 + App.js displays the header and renders the **MainGameContainer Component** in *containers/MainGameContainer.js*
-+ *ComponentDidMount()* runs once to get a session token from the API and stores it in the state (This prevents getting duplicate questions)
++ *ComponentDidMount()* runs once to get a session token from the API and stores it in the state (This prevents the user getting duplicate questions)
 + startGame is set to true so when the render function runs for the first time the *StartGame Component* is rendered
 + **StartGame Component** displays a form which saves the users name to the state, when submitted it uses the getUsername function to store it in the MainGameContainer's state
 + It also displays the PLAY button which uses the *getData* function in the **MainGameContainer** to begin playing
@@ -40,7 +40,7 @@ If I was given the challenge again I would choose the Django framework as I am m
 + This triggers a re-render and now the **PlayGameContainer Component** is rendered
 + The **PlayGameContainer** takes the data from the API call and formats it
 
-   1. Gives the object and id
+   1. Gives the object an id
    2. Decodes the questions and answers
    3. Add the correct answer and the three wrong answers to a new key:value pair within the item
    4. Change the array to an object with ids and decode

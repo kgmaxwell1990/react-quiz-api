@@ -81,8 +81,8 @@ class PlayGameContainer extends Component {
               return (
                 <div className="col s6 answer_box_outer" key={a.aid} onClick={this.handleGuess.bind(this, q, a)}>
                   {a.answer === q.correct_answer ? 
-                    <button className="answer_btn answer_box_inner hover" id="c_answer"><h6 className="answers_text">{a.answer}<i class="material-icons right" id="icon_correct"></i></h6></button>:
-                    <button className="answer_btn answer_box_inner hover w_answer"><h6 className="answers_text">{a.answer}<i class="material-icons right icon_wrong"></i></h6></button>}
+                    <button className="answer_btn answer_box_inner hover" id="c_answer"><h6 className="answers_text">{a.answer}<i className="material-icons right" id="icon_correct"></i></h6></button>:
+                    <button className="answer_btn answer_box_inner hover w_answer"><h6 className="answers_text">{a.answer}<i className="material-icons right icon_wrong"></i></h6></button>}
                 </div>
                   );
               })}
@@ -136,8 +136,8 @@ class PlayGameContainer extends Component {
                 
                 {this.state.qa}
                 
-                <button className="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}><i class="material-icons right">highlight_off</i>Cancel Game</button>
-                <button className="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}><i class="material-icons right">send</i>Next Question</button>
+                <button className="waves-effect waves-light btn btn-small red" id="cancel_game_button" onClick={this.props.home}><i className="material-icons right">highlight_off</i>Cancel Game</button>
+                <button className="waves-effect waves-light btn btn-small" id="next_button" onClick={this.props.getData}><i className="material-icons right">send</i>Next Question</button>
                 <button id="finish_game_button" className="waves-effect waves-light btn btn-small display_none" onClick={this.props.endGame.bind(this, this.state.score)}>Go To ScoreBoard</button>
             </div>
         );

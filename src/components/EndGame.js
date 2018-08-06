@@ -26,8 +26,8 @@ class EndGame extends Component {
         <h4>Your final score is: {this.props.score} / 10 </h4>
 
 
-        <button className="waves-effect waves-light btn btn-small orange" onClick={this.props.home}>Home<i class="material-icons right">home</i></button>
-        <button className="waves-effect waves-light btn btn-small" onClick={this.props.getData}>Play Again<i class="material-icons right">autorenew</i></button>
+        <button className="waves-effect waves-light btn btn-small orange" onClick={this.props.home}>Home<i className="material-icons right">home</i></button>
+        <button className="waves-effect waves-light btn btn-small" onClick={this.props.getData}>Play Again<i className="material-icons right">autorenew</i></button>
       </div>
       <div className="col s6">
         <h5>The Leaderboard </h5>
