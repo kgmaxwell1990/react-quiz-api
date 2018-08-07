@@ -36,7 +36,7 @@ class MainGameContainer extends Component {
         axios.get("https://opentdb.com/api.php?amount=1&category=18&type=multiple&encode=url3986&token=" + this.state.sessionToken)
             .then(response => {
                 this.setState({ qaPre: response.data.results });
-                this.startGame();
+                this.playGame();
             });
         
     }
@@ -50,7 +50,7 @@ class MainGameContainer extends Component {
         this.setState({ endGame: false, startGame: true, playGame: false });
     }
 
-    startGame = () => {
+    playGame = () => {
         if (this.state.timesPlayed === 10) {
             document.getElementById("next_button").classList.add("display_none")
             document.getElementById("cancel_game_button").classList.add("display_none")
@@ -74,10 +74,10 @@ class MainGameContainer extends Component {
     render() {
         return (
             <div>
-        {this.state.startGame === true ? <StartGame getUsername={this.getUsername} getData={this.getData}/>: ""}
-        {this.state.playGame === true ? <PlayGameContainer timesPlayed={this.state.timesPlayed} home={this.home} endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
-        {this.state.endGame === true ? <EndGame leaderboard={this.state.leaderboard} getData={this.getData} home={this.home} score={this.state.score} username={this.state.username}/>: ""}
-      </div>
+                {this.state.startGame === true ? <StartGame getUsername={this.getUsername} getData={this.getData}/>: ""}
+                {this.state.playGame === true ? <PlayGameContainer timesPlayed={this.state.timesPlayed} home={this.home} endGame={this.endGame}  getData={this.getData} qaPre={this.state.qaPre} />: ""}
+                {this.state.endGame === true ? <EndGame leaderboard={this.state.leaderboard} getData={this.getData} home={this.home} score={this.state.score} username={this.state.username}/>: ""}
+            </div>
         );
     }
 }

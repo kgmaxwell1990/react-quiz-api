@@ -20,13 +20,14 @@ If I was given the challenge again I would choose the Django framework as I am m
 + Working out which part of the application to do the API calls
 + Issues with components (not) updating on state/props change
 
-### Tradeoffs
+### Tradeoffs & Unfixed Bugs
 + Would have liked to:
     - Store the leaderboard in a file/database to keep track across devices
     - Have topics so users can choose type of questions
-    - Added a countdown to limit time spent on questions
+    - Add a countdown to limit time spent on questions
+    - Do some unit and integration testing 
 + Should possibly have used Redux / MobX (might have eased some of the challenges outlined above)
-
++ Question 10 is a duplicate of Question 9
 
 # Details of the Application
 + index.js renders the **App Component** in *App.js*
@@ -53,3 +54,7 @@ If I was given the challenge again I would choose the Django framework as I am m
 + A 'Go To ScoreBoard' button is made available after the 10 questions have been asked which calls the *endGame* function in the **MainGameContainer**
 + *endGame* updates the score & leaderboard, and sets the endGame state to true which calls the **EndGame Component**
 + **EndGame Component** displays the final score & leaderboard and gives the user the option to play again or return to the home screen
+
+
+
+
