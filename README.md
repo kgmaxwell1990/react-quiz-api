@@ -36,8 +36,8 @@ If I was given the challenge again I would choose the Django framework as I am m
 + startGame is set to true so when the render function runs for the first time the *StartGame Component* is rendered
 + **StartGame Component** displays a form which saves the users name to the state, when submitted it uses the getUsername function to store it in the MainGameContainer's state
 + It also displays the PLAY button which uses the *getData* function in the **MainGameContainer** to begin playing
-+ The *getData* function makes a call to the API to get one question and stores the response as a list in the state (qaPre), calls the *startGame* function and increments the timesPlayed state by one
-+ The *startGame* function switches the startGame state to false, and the playGame state to true
++ The *getData* function makes a call to the API to get one question and stores the response as a list in the state (qaPre), calls the *playGame* function and increments the timesPlayed state by one
++ The *playGame* function switches the startGame state to false, and the playGame state to true
 + This triggers a re-render and now the **PlayGameContainer Component** is rendered
 + The **PlayGameContainer** takes the data from the API call and formats it
 
