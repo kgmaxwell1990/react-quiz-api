@@ -22,7 +22,7 @@ class EndScreen extends Component {
             <td>{person.score}</td>
             <td>
               <span className="badge">
-                {i === 1? <i class="fas fa-trophy fa-2x"></i>: ""}
+                {i === 1? <i className="fas fa-trophy fa-2x"></i>: ""}
               </span>
             </td>
           </tr>

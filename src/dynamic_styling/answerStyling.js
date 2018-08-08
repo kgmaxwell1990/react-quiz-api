@@ -1,5 +1,5 @@
-export function buttonsOn() {
-
+export function answersOn() {
+    
     document.getElementById('c_answer').classList.add('btn_green');
     document.getElementById('c_answer').classList.remove('hover');
     document.getElementById('icon_correct').innerHTML="check";
@@ -26,9 +26,8 @@ export function buttonsOn() {
     }
 }
 
-export function buttonsOff() {
-    document.getElementById('next_button').disabled = true;
-
+export function answersOff() {
+    
     document.getElementById('c_answer').classList.remove('btn_green');
     document.getElementById('c_answer').classList.add('hover');
     document.getElementById('icon_correct').innerHTML="";

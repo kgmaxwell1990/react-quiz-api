@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {buttonsOn, buttonsOff} from '../dynamic_styling/buttonStyling';
+import {answersOn, answersOff} from '../dynamic_styling/answerStyling';
 
 class PlayGameContainer extends Component {
     state= {
@@ -8,22 +8,20 @@ class PlayGameContainer extends Component {
         };
 
     componentDidMount() {
+        console.log(this.props.qa)
         this.gameLoop();
     }
     
     gameLoop = () => {
-
-        //------ Styling ------ //
-        if(this.props.qa.length === this.state.timesPlayed) {
-            document.getElementById('get_score_button').disabled = true;
-        }else {
-            document.getElementById('next_button').disabled = true;
-        }
-        if (this.state.timesPlayed >= 1) {
         
-        buttonsOff();
+        //------ Styling ------ //
+        document.getElementById('next_button').disabled = true;
+        
+        if (this.state.timesPlayed >= 1) {
+        answersOff();
         }
-
+        //------------ //
+        
         const qa = this.props.qa;
         const i = this.state.timesPlayed
 
@@ -53,14 +51,16 @@ class PlayGameContainer extends Component {
     }
     
     handleGuess = (correctAnswer, guess) => {
+        
         // ------ Styling ------ //
         if(this.props.qa.length === this.state.timesPlayed) {
-            document.getElementById('get_score_button').removeAttribute('disabled');
+            document.getElementById('get_score_button').style.display = "inline-block";
         } else{
             document.getElementById('next_button').disabled = false;
         }
         
-        buttonsOn();
+        answersOn();
+        // ------------ //
 
         if (correctAnswer === guess) {
             this.setState({score: this.state.score + 1 });
@@ -76,7 +76,7 @@ class PlayGameContainer extends Component {
                 {this.state.qa}
                 
                 { this.props.qa.length === this.state.timesPlayed ? 
-                <button className="waves-effect waves-light btn btn-small" id="get_score_button" onClick={this.props.endScreen.bind(this, this.state.score)}><i className="material-icons right">send</i>Check Score</button>
+                <button className="waves-effect waves-light btn btn-small display_none" id="get_score_button" onClick={this.props.endScreen.bind(this, this.state.score)}><i className="material-icons right">send</i>Check Score</button>
                 :
                 <div>
                     <button className="waves-effect waves-light btn btn-small btn_red" onClick={this.props.startScreen}><i className="material-icons right">highlight_off</i>Cancel</button>

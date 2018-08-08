@@ -8,6 +8,10 @@ body {
   height: 100vh;
 }
 
+.display_none {
+  display: none;
+}
+
 .container {
   text-align: center;
   padding: 2%;
