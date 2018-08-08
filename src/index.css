@@ -30,7 +30,6 @@ input:not([type]) {
   font-size: 30px;
 }
 
-
 .display_none {
   display: none;
 }
@@ -45,7 +44,6 @@ input:not([type]) {
 
 .answer_box_inner {
   border: 1px solid #26a69a;
-  /*background-color: rgba(38,166,154,0.8);*/
   width: 100%;
   min-height: 90px;
   margin-top: 10px;
@@ -65,8 +63,13 @@ input:not([type]) {
 }
 
 .btn_red {
-  background-color: #F44336;
-  border: 1px solid #F44336;
+  background-color: #BF3641;
+  border: 1px solid #BF3641;
+}
+.btn_red:hover,
+.btn_red:focus{
+  background-color: #BF3641;
+  border: 1px solid #BF3641;
 }
 
 .color_white {
@@ -84,4 +87,13 @@ input:not([type]) {
 
 ::-ms-input-placeholder { /* Microsoft Edge */
    color: rgba(0,0,0,0.6);
+}
+
+.leader_table {
+  padding: 0 8%;
+}
+
+td {
+  padding: 0;
+  width: 33.333%;
 }

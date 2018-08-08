@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div className="App container main_container">
         <header className="App-header">
-          <h1 className="App-title">Brain Bytes</h1>
+          <img alt="logo" src="https://cdn.pixabay.com/photo/2017/02/11/22/38/quiz-2058883__340.png" width="40%"/>
         </header>
         <MainGameContainer />
       </div>
