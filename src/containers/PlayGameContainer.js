@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {answersOn, answersOff} from '../dynamic_styling/answerStyling';
+import {answersOn, answersOff} from '../utils/answerStyling';
+import {shuffle} from '../utils/shuffle';
 
 class PlayGameContainer extends Component {
     state= {
@@ -8,7 +9,6 @@ class PlayGameContainer extends Component {
         };
 
     componentDidMount() {
-        console.log(this.props.qa)
         this.gameLoop();
     }
     
@@ -23,15 +23,15 @@ class PlayGameContainer extends Component {
         //------------ //
         
         const qa = this.props.qa;
-        const i = this.state.timesPlayed
+        const i = this.state.timesPlayed;
 
         // Push all answers into new array and randomise
-        const all_answers_array = []
-        all_answers_array.push(qa[i]['correct_answer'])
-        all_answers_array.push(qa[i]['wrong_answer1'])
-        all_answers_array.push(qa[i]['wrong_answer2'])
-        all_answers_array.push(qa[i]['wrong_answer3'])
-        qa[i]['all_answers'] = all_answers_array.sort(function(a, b){return 0.5 - Math.random()});
+        const all_answers_array = [];
+        all_answers_array.push(qa[i]['correct_answer']);
+        all_answers_array.push(qa[i]['wrong_answer1']);
+        all_answers_array.push(qa[i]['wrong_answer2']);
+        all_answers_array.push(qa[i]['wrong_answer3']);
+        qa[i]['all_answers'] = shuffle(all_answers_array);
 
         // Create React Element
         let qa_element =  <div className="row" key={qa[i]['id']}>
@@ -83,8 +83,7 @@ class PlayGameContainer extends Component {
                     <button className="waves-effect waves-light btn btn-small" id="next_button" onClick={this.gameLoop}><i className="material-icons right">send</i>Next Question</button>
                 </div>
                 }
-
-
+                
             </div>
         );
     }
