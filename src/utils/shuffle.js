@@ -1,5 +1,4 @@
 export function shuffle(array) {
-    console.log(array)
   var copy = [], n = array.length, i;
 
   // While there remain elements to shuffle…

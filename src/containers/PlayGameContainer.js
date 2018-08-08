@@ -33,7 +33,7 @@ class PlayGameContainer extends Component {
         all_answers_array.push(qa[i]['wrong_answer3']);
         qa[i]['all_answers'] = shuffle(all_answers_array);
 
-        // Create React Element
+        // Create React Element of questions and answers
         let qa_element =  <div className="row" key={qa[i]['id']}>
                             <h5 className="question_text">{qa[i]['question']}</h5>
                             {qa[i]['all_answers'].map(a => {
