@@ -15,17 +15,16 @@ class EndScreen extends Component {
     let i = 0
     const leaderboard = sorted_leaderboard.map((person) => {
       i = i+1
-      
-    return (
-          <tr>
-            <td>{person.username}</td>
-            <td>{person.score}</td>
-            <td>
-              <span className="badge">
-                {i === 1? <i className="fas fa-trophy fa-2x"></i>: ""}
-              </span>
-            </td>
-          </tr>
+      return (
+            <tr>
+              <td>{person.username}</td>
+              <td>{person.score}</td>
+              <td>
+                <span className="badge">
+                  {i === 1? <i className="fas fa-trophy fa-2x"></i>: ""}
+                </span>
+              </td>
+            </tr>
     );
     
   });

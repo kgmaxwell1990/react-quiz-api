@@ -26,12 +26,7 @@ class PlayGameContainer extends Component {
         const i = this.state.timesPlayed;
 
         // Push all answers into new array and randomise
-        const all_answers_array = [];
-        all_answers_array.push(qa[i]['correct_answer']);
-        all_answers_array.push(qa[i]['wrong_answer1']);
-        all_answers_array.push(qa[i]['wrong_answer2']);
-        all_answers_array.push(qa[i]['wrong_answer3']);
-        qa[i]['all_answers'] = shuffle(all_answers_array);
+        qa[i]['all_answers'] = shuffle([qa[i]['correct_answer'],qa[i]['wrong_answer1'],qa[i]['wrong_answer2'],qa[i]['wrong_answer3']]);
 
         // Create React Element of questions and answers
         let qa_element =  <div className="row" key={qa[i]['id']}>

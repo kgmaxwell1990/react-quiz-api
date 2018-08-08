@@ -25,7 +25,7 @@ class MainGameContainer extends Component {
 
     getUsername = (e, name) => {
         e.preventDefault();
-        document.getElementById("greeting").innerHTML = "<h3 className='ease_in'>Hi " + name + ", press play to start the Quiz!</h3>";
+        document.getElementById("greeting").innerHTML = "<h3 class='greeting'>Hi " + name + ", press play to start the Quiz!</h3>";
         document.getElementById('play_button').classList.remove('display_none');
         this.setState({ username: name });
     }
